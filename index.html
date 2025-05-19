@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATRIX SALE | Next-Gen Solana Token</title>
+    <style>
+        :root {
+            --matrix-green: #00ff41;
+            --dark-matrix: #0a0a0a;
+            --neon-glow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--dark-matrix);
+            color: var(--matrix-green);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* MATRIX RAIN BACKGROUND */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        /* GLOWING TEXT */
+        .glow {
+            text-shadow: var(--neon-glow);
+            animation: flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: var(--neon-glow);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        /* HEADER */
+        header {
+            padding: 20px;
+            border-bottom: 1px solid var(--matrix-green);
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--matrix-green);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* HERO SECTION */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-box {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--matrix-green);
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .countdown-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: transparent;
+            color: var(--matrix-green);
+            border: 2px solid var(--matrix-green);
+            font-weight: bold;
+            text-decoration: none;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .btn:hover {
+            background: var(--matrix-green);
+            color: var(--dark-matrix);
+            transform: translateY(-3px);
+        }
+        
+        /* TOKENOMICS */
+        .tokenomics {
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid var(--matrix-green);
+            border-bottom: 1px solid var(--matrix-green);
+        }
+        
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+        
+        .token-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--matrix-green);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .token-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* HOW TO BUY */
+        .buy-steps {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-left: 3px solid var(--matrix-green);
+        }
+        
+        .step-number {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: var(--matrix-green);
+        }
+        
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--matrix-green);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--matrix-green);
+            font-size: 1.5rem;
+        }
+        
+        /* MATRIX DIGITAL EFFECT */
+        @keyframes matrix {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MATRIX RAIN BACKGROUND -->
+    <canvas id="matrix" class="matrix-rain"></canvas>
+    
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div class="logo glow">MATRIX SALE</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#buy">How to Buy</a>
+                <a href="#social">Social</a>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1 class="glow">THE MATRIX HAS YOU</h1>
+            <p>Join the revolution. Our Solana token is breaking the system with deflationary mechanics, instant rewards, and a community-driven future.</p>
+            
+            <div class="countdown">
+                <div class="countdown-box">
+                    <span id="days">00</span>
+                    <small>DAYS</small>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours">00</span>
+                    <small>HOURS</small>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes">00</span>
+                    <small>MINUTES</small>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds">00</span>
+                    <small>SECONDS</small>
+                </div>
+            </div>
+            
+            <a href="#buy" class="btn glow">BUY NOW</a>
+            <a href="#tokenomics" class="btn glow">TOKENOMICS</a>
+        </div>
+    </section>
+    
+    <!-- TOKENOMICS -->
+    <section class="tokenomics" id="tokenomics">
+        <h2 class="glow">TOKENOMICS</h2>
+        <p>Designed for sustainability and growth</p>
+        
+        <div class="token-grid">
+            <div class="token-card glow">
+                <h3>1 BILLION</h3>
+                <p>Total Supply</p>
+            </div>
+            <div class="token-card glow">
+                <h3>5% TAX</h3>
+                <p>Per Transaction</p>
+            </div>
+            <div class="token-card glow">
+                <h3>3% REWARDS</h3>
+                <p>To Holders</p>
+            </div>
+            <div class="token-card glow">
+                <h3>2% LIQUIDITY</h3>
+                <p>Locked Forever</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- HOW TO BUY -->
+    <section class="buy-steps" id="buy">
+        <h2 class="glow" style="text-align: center; margin-bottom: 40px;">HOW TO BUY</h2>
+        
+        <div class="step">
+            <div class="step-number glow">1</div>
+            <div>
+                <h3 class="glow">Get a Solana Wallet</h3>
+                <p>Download Phantom or Solflare and secure your private key.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number glow">2</div>
+            <div>
+                <h3 class="glow">Fund with SOL</h3>
+                <p>Buy SOL on an exchange and send it to your wallet.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number glow">3</div>
+            <div>
+                <h3 class="glow">Connect to Raydium</h3>
+                <p>Go to Raydium.io, connect your wallet, and paste our contract.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number glow">4</div>
+            <div>
+                <h3 class="glow">Swap SOL for MATRIX</h3>
+                <p>Enter the amount and confirm the transaction.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer id="social">
+        <div class="logo glow" style="font-size: 2rem; margin-bottom: 20px;">MATRIX SALE</div>
+        <p>Join the resistance. Break the system.</p>
+        
+        <div class="social-links">
+            <a href="#" class="glow">Twitter</a>
+            <a href="#" class="glow">Telegram</a>
+            <a href="#" class="glow">Discord</a>
+        </div>
+        
+        <p style="margin-top: 30px; font-size: 0.8rem;">© 2023 MATRIX SALE. All rights reserved.</p>
+    </footer>
+    
+    <!-- MATRIX RAIN SCRIPT -->
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        
+        const alphabet = katakana + latin + nums;
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        
+        setInterval(draw, 30);
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const launchDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+            
+            const diff = launchDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
