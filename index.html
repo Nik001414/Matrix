@@ -1,453 +1,587 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATRIX SALE | Next-Gen Solana Token</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Курьер под Ключ | Заработок от 300к/мес | Полный фарш</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --matrix-green: #00ff41;
-            --dark-matrix: #0a0a0a;
-            --neon-glow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Courier New', monospace;
-            background-color: var(--dark-matrix);
-            color: var(--matrix-green);
+            font-family: 'Inter', sans-serif;
+            background: #0b0c10;
+            color: #eef2ff;
             overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
-        
-        /* MATRIX RAIN BACKGROUND */
-        .matrix-rain {
+
+        /* Анимированный градиентный фон (ещё сочнее) */
+        .animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.2;
-            pointer-events: none;
+            z-index: -2;
+            background: radial-gradient(circle at 30% 40%, #0a0f1e, #020408);
         }
-        
-        /* GLOWING TEXT */
-        .glow {
-            text-shadow: var(--neon-glow);
-            animation: flicker 1.5s infinite alternate;
-        }
-        
-        @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                text-shadow: var(--neon-glow);
-            }
-            20%, 24%, 55% {
-                text-shadow: none;
-            }
-        }
-        
-        /* HEADER */
-        header {
-            padding: 20px;
-            border-bottom: 1px solid var(--matrix-green);
-            box-shadow: 0 0 15px var(--matrix-green);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--matrix-green);
-            text-decoration: none;
-            font-weight: bold;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
+
+        .animated-bg::before {
+            content: "";
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--matrix-green);
-            transition: width 0.3s;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(from 0deg, #ff6a00, #ffdd00, #00ffcc, #ff00aa, #ff6a00);
+            filter: blur(100px);
+            opacity: 0.25;
+            animation: rotateBg 25s linear infinite;
+            z-index: -1;
         }
-        
-        .nav-links a:hover::after {
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Плавающие частицы */
+        .floating-particles {
+            position: fixed;
             width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
-        
-        /* HERO SECTION */
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,100,0,0.6), transparent);
+            border-radius: 50%;
+            filter: blur(3px);
+            animation: floatParticle 12s infinite alternate;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.2; }
+            100% { transform: translateY(-80px) translateX(40px) scale(1.5); opacity: 0.6; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(1);}
+            100% { opacity: 1; transform: scale(1.3);}
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Анимации появления */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2), transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero section */
         .hero {
-            height: 80vh;
+            min-height: 90vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
             text-align: center;
             position: relative;
         }
-        
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            letter-spacing: 4px;
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .countdown-box {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid var(--matrix-green);
-            padding: 15px 25px;
-            border-radius: 5px;
-            box-shadow: var(--neon-glow);
-        }
-        
-        .countdown-box span {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        
-        /* BUTTONS */
-        .btn {
+        .badge {
+            background: rgba(255, 106, 0, 0.25);
+            backdrop-filter: blur(15px);
+            border-radius: 100px;
+            padding: 0.6rem 1.5rem;
             display: inline-block;
-            padding: 15px 30px;
-            background: transparent;
-            color: var(--matrix-green);
-            border: 2px solid var(--matrix-green);
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,106,0,0.5);
+            margin-bottom: 2rem;
+            animation: pulseGlow 2.2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255,106,0,0.5); border-color: rgba(255,106,0,0.5);}
+            70% { box-shadow: 0 0 0 18px rgba(255,106,0,0); border-color: rgba(255,106,0,0.9);}
+            100% { box-shadow: 0 0 0 0 rgba(255,106,0,0);}
+        }
+        h1 {
+            font-size: clamp(2.8rem, 9vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347, #FF6A00, #FF3D00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .hero-sub {
+            font-size: 1.4rem;
+            max-width: 750px;
+            margin: 1rem auto;
+            opacity: 0.95;
+        }
+        .money-glow {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #F9D423, #FF4E50, #FF6A00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: bounceSoft 2s infinite;
+        }
+        @keyframes bounceSoft {
+            0%,100%{ transform: translateY(0px);}
+            50%{ transform: translateY(-8px);}
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+        .btn {
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
             text-decoration: none;
-            margin: 10px;
             transition: all 0.3s;
-            box-shadow: var(--neon-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
         }
-        
-        .btn:hover {
-            background: var(--matrix-green);
-            color: var(--dark-matrix);
-            transform: translateY(-3px);
+        .btn-primary {
+            background: linear-gradient(95deg, #ff7a2f, #ff4d00);
+            color: white;
+            box-shadow: 0 10px 25px -5px rgba(255, 77, 0, 0.5);
         }
-        
-        /* TOKENOMICS */
-        .tokenomics {
-            padding: 80px 20px;
+        .btn-primary:hover {
+            transform: scale(1.07);
+            box-shadow: 0 20px 35px -8px rgba(255, 77, 0, 0.8);
+        }
+        .btn-outline {
+            border: 2px solid #ff7a2f;
+            color: #ffd9b5;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(6px);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 122, 47, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Города */
+        .cities-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0 2rem;
+        }
+        .city-chip {
+            background: rgba(20, 30, 55, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(255,100,0,0.5);
+            transition: all 0.2s;
+            animation: floatChip 5s infinite ease-in-out;
+        }
+        @keyframes floatChip {
+            0% { transform: translateY(0px);}
+            50% { transform: translateY(-6px);}
+            100% { transform: translateY(0px);}
+        }
+
+        .section-title {
+            font-size: 2.4rem;
             text-align: center;
-            border-top: 1px solid var(--matrix-green);
-            border-bottom: 1px solid var(--matrix-green);
+            margin: 4rem 0 2rem;
+            position: relative;
         }
-        
-        .token-grid {
+        .section-title span {
+            background: linear-gradient(120deg, #FBD786, #f7797d, #ff9a5e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Карточки преимуществ с 3D эффектом */
+        .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 50px auto;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
-        
-        .token-card {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--matrix-green);
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: var(--neon-glow);
+        .card {
+            background: rgba(15, 25, 45, 0.6);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 100, 70, 0.25);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.3);
         }
-        
-        .token-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+        .card.visible-card {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        /* HOW TO BUY */
-        .buy-steps {
-            padding: 80px 20px;
-            max-width: 800px;
-            margin: 0 auto;
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ff914d;
+            background: rgba(30, 45, 70, 0.8);
+            box-shadow: 0 30px 45px -10px rgba(0,0,0,0.7);
         }
-        
-        .step {
+        .card i {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffb347, #ff6b08);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Блок лайфхаков расширенный */
+        .tips-box {
+            background: linear-gradient(145deg, #10161fcc, #070b10cc);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 8px solid #ff7e2e;
+            position: relative;
+            overflow: hidden;
+        }
+        .tips-list li {
+            margin: 1.2rem 0;
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-left: 3px solid var(--matrix-green);
+            gap: 14px;
+            font-size: 1.1rem;
         }
-        
-        .step-number {
-            font-size: 2rem;
-            margin-right: 20px;
-            color: var(--matrix-green);
+
+        /* Новая секция: история успеха + статистика */
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: center;
         }
-        
-        /* FOOTER */
+        .stat-item {
+            background: rgba(0,0,0,0.5);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 180px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Дополнительный блок с отзывами (воды побольше) */
+        .testimonial {
+            background: rgba(0,0,0,0.4);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            border: 1px solid rgba(255,100,50,0.3);
+            transition: 0.3s;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background: #ff6a00;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 99;
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         footer {
             text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--matrix-green);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,100,50,0.3);
         }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .social-links a {
-            color: var(--matrix-green);
-            font-size: 1.5rem;
-        }
-        
-        /* MATRIX DIGITAL EFFECT */
-        @keyframes matrix {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-        
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .countdown {
-                flex-wrap: wrap;
-            }
-            
-            .nav-links {
-                display: none;
-            }
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn { width: 90%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <!-- MATRIX RAIN BACKGROUND -->
-    <canvas id="matrix" class="matrix-rain"></canvas>
-    
-    <!-- HEADER -->
-    <header>
-        <nav>
-            <div class="logo glow">MATRIX SALE</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#tokenomics">Tokenomics</a>
-                <a href="#buy">How to Buy</a>
-                <a href="#social">Social</a>
-            </div>
-        </nav>
-    </header>
-    
-    <!-- HERO SECTION -->
-    <section class="hero" id="about">
-        <div class="hero-content">
-            <h1 class="glow">THE MATRIX HAS YOU</h1>
-            <p>Join the revolution. Our Solana token is breaking the system with deflationary mechanics, instant rewards, and a community-driven future.</p>
-            
-            <div class="countdown">
-                <div class="countdown-box">
-                    <span id="days">00</span>
-                    <small>DAYS</small>
-                </div>
-                <div class="countdown-box">
-                    <span id="hours">00</span>
-                    <small>HOURS</small>
-                </div>
-                <div class="countdown-box">
-                    <span id="minutes">00</span>
-                    <small>MINUTES</small>
-                </div>
-                <div class="countdown-box">
-                    <span id="seconds">00</span>
-                    <small>SECONDS</small>
-                </div>
-            </div>
-            
-            <a href="#buy" class="btn glow">BUY NOW</a>
-            <a href="#tokenomics" class="btn glow">TOKENOMICS</a>
+<div class="animated-bg"></div>
+<div class="stars" id="starsContainer"></div>
+<div class="floating-particles" id="particlesContainer"></div>
+
+<div class="container">
+    <div class="hero fade-up" id="heroBlock">
+        <div class="badge"><i class="fas fa-crown"></i> Личный Ментор №1 по курьерской империи</div>
+        <h1>Курьер <span style="background: linear-gradient(145deg,#FFB347,#FF6A00); background-clip:text; -webkit-background-clip:text; color:transparent;">под Ключ</span></h1>
+        <div class="money-glow"><i class="fas fa-chart-line"></i> помогу зарабатывать от 300 000 ₽/мес</div>
+        <p class="hero-sub">Полный фарш: стабильный доход, жильё, транспорт, юр. помощь, секретные бонусы и лайфхаки для максимального профита!</p>
+        <div class="btn-group">
+            <a href="https://t.me/vlad_life_vlad" target="_blank" class="btn btn-primary" id="telegramMainBtn">
+                <i class="fab fa-telegram-plane telegram-icon"></i> Хочу 300к/мес!
+            </a>
+            <a href="#benefits" class="btn btn-outline"><i class="fas fa-arrow-down"></i> Все плюшки</a>
         </div>
-    </section>
-    
-    <!-- TOKENOMICS -->
-    <section class="tokenomics" id="tokenomics">
-        <h2 class="glow">TOKENOMICS</h2>
-        <p>Designed for sustainability and growth</p>
-        
-        <div class="token-grid">
-            <div class="token-card glow">
-                <h3>1 BILLION</h3>
-                <p>Total Supply</p>
-            </div>
-            <div class="token-card glow">
-                <h3>5% TAX</h3>
-                <p>Per Transaction</p>
-            </div>
-            <div class="token-card glow">
-                <h3>3% REWARDS</h3>
-                <p>To Holders</p>
-            </div>
-            <div class="token-card glow">
-                <h3>2% LIQUIDITY</h3>
-                <p>Locked Forever</p>
-            </div>
+    </div>
+
+    <div class="fade-up">
+        <div style="text-align:center; margin-top: 2rem;">
+            <i class="fas fa-route" style="color:#ff884d;"></i> <strong>7 лет в деле, 15+ городов, 2500+ учеников по всей России</strong>
         </div>
-    </section>
-    
-    <!-- HOW TO BUY -->
-    <section class="buy-steps" id="buy">
-        <h2 class="glow" style="text-align: center; margin-bottom: 40px;">HOW TO BUY</h2>
-        
-        <div class="step">
-            <div class="step-number glow">1</div>
-            <div>
-                <h3 class="glow">Get a Solana Wallet</h3>
-                <p>Download Phantom or Solflare and secure your private key.</p>
-            </div>
+        <div class="cities-cloud" id="citiesCloud"></div>
+        <p class="hero-sub" style="font-size:1rem;">“Я объездил Москву, Питер, Сочи, Ростов, НН, Иваново, Воронеж, Краснодар, Казань, Екатеринбург... Знаю каждую курьерскую тропинку. Научу тебя тому, что другие скрывают!”</p>
+    </div>
+
+    <div id="benefits">
+        <div class="section-title fade-up"><span>🔥 Что ты получишь со мной 🔥</span></div>
+        <div class="grid-cards" id="benefitsGrid"></div>
+    </div>
+
+    <!-- Блок статистики -->
+    <div class="stats-row fade-up">
+        <div class="stat-item"><div class="stat-number">10 000+ ₽</div><div>Средний дневной доход</div><i class="fas fa-coins"></i></div>
+        <div class="stat-item"><div class="stat-number">98%</div><div>Учеников вышли на 250к+ за 2 месяца</div></div>
+        <div class="stat-item"><div class="stat-number">24/7</div><div>Поддержка и помощь при ДТП/ДПС</div></div>
+    </div>
+
+    <div class="fade-up tips-box" id="secretsBlock">
+        <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-gem"></i> Секретные лайфхаки и жирные бонусы</h2>
+        <ul class="tips-list">
+            <li><i class="fas fa-rocket"></i> <strong>Секреты получения бонусов:</strong> расскажу где и как забирать скрытые акции агрегаторов до 150к в месяц! Реферальные схемы + халявные страховки.</li>
+            <li><i class="fas fa-chart-line"></i> <strong>Лайфхаки по увеличению заработка:</strong> Маршруты-ускорители, совмещение заказов, техника «Тройной аппетит» - повышай чек на 70%.</li>
+            <li><i class="fas fa-car-crash"></i> <strong>Помощь при ДТП и ДПС:</strong> Горячая линия, юрист на связи, шаблоны объяснительных и быстрая эвакуация проблем.</li>
+            <li><i class="fas fa-unlock-alt"></i> <strong>Блокировка аккаунта?</strong> Разблокируем за 2-12 часов — у меня есть прямые контакты в поддержке.</li>
+            <li><i class="fas fa-utensils"></i> <strong>Экономия в питании до 20 000₽/мес:</strong> карты лояльности, тайные скидки в 300+ точках по РФ.</li>
+        </ul>
+        <div style="margin-top: 20px; background: rgba(0,0,0,0.5); border-radius: 30px; padding: 15px;">
+            <i class="fas fa-check-circle"></i> «Каждый мой подопечный начинает с 8000-10000 рублей в день уже на первой неделе. Гарантирую стабильный поток заказов и защиту от выгорания.»
         </div>
-        
-        <div class="step">
-            <div class="step-number glow">2</div>
-            <div>
-                <h3 class="glow">Fund with SOL</h3>
-                <p>Buy SOL on an exchange and send it to your wallet.</p>
-            </div>
+    </div>
+
+    <!-- дополнительный блок с историей + вода-->
+    <div class="testimonial fade-up">
+        <i class="fas fa-quote-left" style="font-size: 2rem; color:#ff884d;"></i>
+        <p style="font-size:1.2rem; margin-top: 0.5rem;">Когда я начинал курьером 7 лет назад, у меня не было ни жилья, ни нормального транспорта. Теперь у меня своя команда, а ты можешь пройти этот путь за 2 месяца с моей поддержкой. Я даю не просто работу — я даю систему, где ты будешь зарабатывать от 300 тысяч ежемесячно, чувствуя себя уверенно в любом городе РФ!</p>
+        <p style="margin-top: 1rem;"><strong>— Алексей, эксперт-курьер, наставник с 7-летним стажем</strong></p>
+    </div>
+
+    <div class="fade-up" style="background: rgba(0,0,0,0.55); border-radius: 2rem; padding: 2rem; margin: 2rem 0;">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+            <div><i class="fas fa-hand-holding-heart" style="font-size: 4rem; color: #ff9f4a;"></i></div>
+            <div><h3>⭐ Стабильный заработок от 10 000 ₽/день + полное сопровождение ⭐</h3>
+            <p>✅ Помощь в трудоустройстве в ТОП-службы доставки<br>
+            ✅ Поиск жилья (эконом-варианты, комнаты, квартиры посуточно со скидкой)<br>
+            ✅ Помощь в поиске транспорта (вело, электро, авто — лучшие цены аренды)<br>
+            ✅ Помощь при ДТП и ДПС, юридическая консультация<br>
+            ✅ Разблокировка аккаунтов и снятие штрафов</p></div>
         </div>
-        
-        <div class="step">
-            <div class="step-number glow">3</div>
-            <div>
-                <h3 class="glow">Connect to Raydium</h3>
-                <p>Go to Raydium.io, connect your wallet, and paste our contract.</p>
-            </div>
-        </div>
-        
-        <div class="step">
-            <div class="step-number glow">4</div>
-            <div>
-                <h3 class="glow">Swap SOL for MATRIX</h3>
-                <p>Enter the amount and confirm the transaction.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FOOTER -->
-    <footer id="social">
-        <div class="logo glow" style="font-size: 2rem; margin-bottom: 20px;">MATRIX SALE</div>
-        <p>Join the resistance. Break the system.</p>
-        
-        <div class="social-links">
-            <a href="#" class="glow">Twitter</a>
-            <a href="#" class="glow">Telegram</a>
-            <a href="#" class="glow">Discord</a>
-        </div>
-        
-        <p style="margin-top: 30px; font-size: 0.8rem;">© 2023 MATRIX SALE. All rights reserved.</p>
+    </div>
+
+    <div id="contactForm" class="fade-up" style="margin: 4rem 0 2rem; background: #11161fdd; backdrop-filter: blur(18px); border-radius: 2rem; padding: 2rem; text-align: center;">
+        <h2><i class="fa-regular fa-comments"></i> Готов начать зарабатывать 300 000 ₽ в месяц?</h2>
+        <p style="margin: 1rem 0;">Заполни форму — я отправлю тебе пошаговый план + бонус: «10 секретных фишек для удвоения дневного заработка»</p>
+        <form id="demoForm" style="max-width: 550px; margin: 0 auto;">
+            <input type="text" id="nameInput" placeholder="Твое имя" style="width:100%; padding: 1rem; margin: 0.6rem 0; border-radius: 60px; background: #1e293b; border: 1px solid #ff884d; color: white;" required>
+            <input type="tel" id="phoneInput" placeholder="Телеграм или телефон" style="width:100%; padding: 1rem; margin: 0.6rem 0; border-radius: 60px; background: #1e293b; border: 1px solid #ff884d; color: white;" required>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content: center;"><i class="fas fa-paper-plane"></i> Получить доступ к секретам</button>
+            <p id="formStatus" style="margin-top: 12px;"></p>
+        </form>
+    </div>
+    <footer>
+        <p>© Курьер под Ключ — полный цикл поддержки | 7 лет стажа | Твой доход — моя репутация</p>
+        <p><i class="fas fa-shield-alt"></i> Конфиденциальность, помощь 24/7, честные лайфхаки без разводов</p>
     </footer>
-    
-    <!-- MATRIX RAIN SCRIPT -->
-    <script>
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        
-        const alphabet = katakana + latin + nums;
-        
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        
-        const rainDrops = [];
-        
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-        
-        const draw = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+</div>
+
+<div class="scroll-top" id="scrollTopBtn">
+    <i class="fas fa-chevron-up"></i>
+</div>
+
+<script>
+    // звезды
+    const starsContainer = document.getElementById('starsContainer');
+    for(let i=0;i<200;i++) {
+        let star = document.createElement('div');
+        star.classList.add('star');
+        let size = Math.random()*3+1.5;
+        star.style.width = size+'px';
+        star.style.height = size+'px';
+        star.style.left = Math.random()*100+'%';
+        star.style.top = Math.random()*100+'%';
+        star.style.animationDelay = Math.random()*6+'s';
+        starsContainer.appendChild(star);
+    }
+    // летающие частицы
+    const particlesDiv = document.getElementById('particlesContainer');
+    for(let i=0;i<40;i++) {
+        let p = document.createElement('div');
+        p.classList.add('particle');
+        let s = Math.random()*30+10;
+        p.style.width = s+'px';
+        p.style.height = s+'px';
+        p.style.left = Math.random()*100+'%';
+        p.style.top = Math.random()*100+'%';
+        p.style.animationDuration = 10+Math.random()*15+'s';
+        p.style.animationDelay = Math.random()*8+'s';
+        particlesDiv.appendChild(p);
+    }
+
+    const citiesList = ['Москва','Санкт-Петербург','Сочи','Ростов-на-Дону','Нижний Новгород','Иваново','Воронеж','Казань','Краснодар','Екатеринбург','Самара','Челябинск'];
+    const cloudDiv = document.getElementById('citiesCloud');
+    citiesList.forEach(city=>{
+        let chip = document.createElement('div');
+        chip.className='city-chip';
+        chip.innerHTML=`<i class="fas fa-map-pin"></i> ${city}`;
+        chip.style.animationDelay=Math.random()*2+'s';
+        cloudDiv.appendChild(chip);
+    });
+
+    const benefitsData = [
+        { icon: "fas fa-chart-simple", title: "Стабильный заработок", desc: "От 10 000₽/день — система без просадок. Никакой лотереи, только рабочие схемы." },
+        { icon: "fas fa-briefcase", title: "Помощь в трудоустройстве", desc: "Устроим в лучшие сервисы (Яндекс, СберМаркет, Delivery) с приоритетными условиями." },
+        { icon: "fas fa-house-chimney", title: "Помощь в поиске жилья", desc: "Койко-места, комнаты, квартиры от 5000₽/мес. Проверенные варианты без посредников." },
+        { icon: "fas fa-motorcycle", title: "Помощь в поиске транспорта", desc: "Аренда байков, вело, электро и авто со скидкой до 30% по партнерству." },
+        { icon: "fas fa-utensil-spoon", title: "Экономия в питании", desc: "Карты лояльности, скидочные программы в столовых и кафе — экономия до 20 000₽." },
+        { icon: "fas fa-car-side", title: "Помощь при ДТП и ДПС", desc: "Юридическая поддержка 24/7, разбор спорных ситуаций, снижение штрафов." },
+        { icon: "fas fa-unlock-alt", title: "Разблокировка аккаунта", desc: "Верну доступ за 2-24 часа. Знаем все лазейки и контакты в поддержке." },
+        { icon: "fas fa-trophy", title: "Секреты бонусов", desc: "Раскрою тайные промо и бонусные программы, о которых молчат 99% курьеров." },
+        { icon: "fas fa-lightbulb", title: "Лайфхаки по заработку", desc: "Маршруты двойной эффективности, совмещение заказов, накрутка рейтинга." },
+        { icon: "fas fa-user-check", title: "Личный наставник", desc: "Со мной на связи — решаем любые проблемы вместе, звонок в любое время." }
+    ];
+    const grid = document.getElementById('benefitsGrid');
+    benefitsData.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<i class="${item.icon}"></i><h3>${item.title}</h3><p>${item.desc}</p>`;
+        grid.appendChild(card);
+    });
+
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                if(entry.target.classList.contains('card')) entry.target.classList.add('visible-card');
+                else entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
-        };
-        
-        setInterval(draw, 30);
-        
-        // Countdown Timer
-        function updateCountdown() {
-            const now = new Date();
-            const launchDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
-            
-            const diff = launchDate - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // Window resize handler
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
         });
-    </script>
+    }, { threshold: 0.2 });
+    fadeElements.forEach(el => observer.observe(el));
+    cards.forEach(card => observer.observe(card));
+    setTimeout(() => document.getElementById('heroBlock')?.classList.add('visible'), 200);
+
+    // scroll to top
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) scrollBtn.classList.add('show');
+        else scrollBtn.classList.remove('show');
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const form = document.getElementById('demoForm');
+    const statusMsg = document.getElementById('formStatus');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('nameInput').value.trim();
+        const phone = document.getElementById('phoneInput').value.trim();
+        if(!name || !phone) {
+            statusMsg.innerHTML = '<span style="color:#ffaa88;">❌ Заполни имя и контакт</span>';
+            return;
+        }
+        statusMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправляю супер-секреты...';
+        setTimeout(() => {
+            statusMsg.innerHTML = '<span style="color:#a5ffa5;">✅ Готово! Проверяй личные сообщения — я с тобой свяжусь в ближайшие 30 минут и дам стартовый гайд!</span>';
+            form.reset();
+        }, 1000);
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href === "#" || href === "") return;
+            const target = document.querySelector(href);
+            if(target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    console.log("Продолжение — сайт стал ещё круче, с анимациями, бонус-блоком, статистикой и максимальной пользой!");
+</script>
 </body>
 </html>
